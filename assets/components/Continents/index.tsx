@@ -21,7 +21,6 @@ const validateRequired = required();
 export const ContinentList = (props: any) => (
   <List {...props}>
     <Datagrid rowClick="edit">
-      <NumberField source="id" />
       <EmailField source="slug" />
       <EmailField source="name" />
       <ShowButton />

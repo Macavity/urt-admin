@@ -6,7 +6,7 @@ import {
     Edit,
     List,
     NumberField,
-    NumberInput,
+    NumberInput, ReferenceField,
     ReferenceInput,
     required,
     SelectInput,
@@ -37,10 +37,10 @@ const filterByName = (searchText: any) => {
 };
 
 const stageFilters = [
-    <ReferenceInput label="Continent" source="continent.id" reference="continents">
+    <ReferenceInput label="Continent" source="continent" reference="continents">
         <SelectInput optionText="name"/>
     </ReferenceInput>,
-    <ReferenceInput label="Zone" source="zone.id" reference="zones" alwaysOn>
+    <ReferenceInput label="Zone" source="zone" reference="zones" alwaysOn>
         <SelectInput optionText="name"/>
     </ReferenceInput>,
 ];
@@ -50,8 +50,12 @@ export const StageList = (props: any) => (
         <Datagrid rowClick="edit">
             <TextField source="id"/>
             <TextField source="level"/>
-            <TextField label="Zone" source="zone.name"/>
-            <TextField label="Boss" source="boss.name"/>
+            <ReferenceField label="Zone" reference="zones" source="zone">
+                <TextField source="name"/>
+            </ReferenceField>
+            <ReferenceField label="Boss" reference="bosses" source="boss">
+                <TextField label="Boss" source="name"/>
+            </ReferenceField>
         </Datagrid>
     </List>
 );

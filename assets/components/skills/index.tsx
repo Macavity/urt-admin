@@ -7,7 +7,7 @@ import {
     EmailField,
     List,
     NumberField,
-    NumberInput,
+    NumberInput, ReferenceField,
     ReferenceInput,
     required,
     SelectInput,
@@ -34,7 +34,7 @@ const jobChoices = [
 ];
 
 const filters = [
-    <ReferenceInput reference="jobs" source="job.id" label="Job" alwaysOn>
+    <ReferenceInput reference="jobs" source="job" label="Job" alwaysOn>
         <SelectInput value="name"/>
     </ReferenceInput>
 ];
@@ -42,10 +42,11 @@ const filters = [
 export const SkillList = (props: any) => (
     <List {...props} filters={filters} perPage={50} sort={{ field: 'name', order: 'ASC' }}>
         <Datagrid rowClick="show">
-            <NumberField source="id"/>
             <EmailField source="name"/>
             <EmailField source="shortName"/>
-            <TextField label="Job" source="job.name"/>
+            <ReferenceField label="Job" reference="jobs" source="job">
+                <TextField source="name" />
+            </ReferenceField>
             <ShowButton/>
             <EditButton/>
         </Datagrid>

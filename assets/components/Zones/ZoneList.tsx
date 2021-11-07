@@ -2,7 +2,7 @@ import {
   Datagrid,
   EditButton,
   EditButtonProps,
-  List,
+  List, ReferenceField,
   ReferenceInput,
   SearchInput,
   SelectInput,
@@ -14,7 +14,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const zoneFilters = [
   <SearchInput source="name" alwaysOn />,
-  <ReferenceInput label="Continent" source="continent.id" reference="continents" alwaysOn>
+  <ReferenceInput label="Continent" source="continent" reference="continents" alwaysOn>
     <SelectInput optionText="name" />
   </ReferenceInput>,
 ];
@@ -40,11 +40,12 @@ const FrontendDetailPageButton = ({ record }: EditButtonProps) => {
 export const ZoneList = (props: any) => (
   <List {...props} filters={zoneFilters}>
     <Datagrid rowClick="edit">
-      <TextField source="id" />
       <TextField source="position" />
       <TextField source="slug" />
       <TextField source="name" />
-      <TextField label="Continent" source="continent.name" />
+      <ReferenceField reference="continents" source="continent">
+        <TextField label="Continent" source="name" />
+      </ReferenceField>
       <FrontendDetailPageButton {...props} />
       <EditButton />
     </Datagrid>

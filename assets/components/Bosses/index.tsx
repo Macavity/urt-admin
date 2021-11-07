@@ -33,7 +33,6 @@ const bossFilters = [
 export const BossList = (props: any) => (
   <List {...props} filters={bossFilters}>
     <Datagrid rowClick="edit">
-      <TextField source="id" />
       <TextField source="name" />
       <SelectField source="primaryElement" choices={elementChoices} />
       <SelectField source="secondaryElement" choices={elementChoices} />
